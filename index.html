@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BESTIE</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Monaco, monospace;
+            background-color: #0b0000;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #000000;
+            padding: 20px;
+            border-radius: 10px;
+            width: 500px;
+            margin: 100px auto;
+            box-shadow: 0 0 10px rgb(243, 0, 0);
+        }
+
+        .heading {
+            font-size: 34px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"],
+        input[type="button"] {
+            background-color: hwb(0 41% 59%);
+            color: #000000;
+            padding: 10px 150px;
+            border: none;
+            border-radius: 5px;
+            border: 1px solid #b70000;
+            cursor: pointer;
+            margin-bottom: 20px;
+            margin-right: 75px;
+            margin-left: 75px;
+            transition: all 0.3s ease;
+            
+        }
+
+        input[type="submit"]:hover,
+        input[type="button"]:hover ,
+        button[type="submit"]:hover{
+            background-color: rgb(244, 0, 0);
+        }
+        /* Style for the name and email input fields */
+        input[type="text"],
+        input[type="email"],
+        textarea[ name="message"] {
+            background-color: #ffffff; /* Change background color */
+            padding: 5px; /* Add padding for space */
+            margin-bottom: 10px; /* Add margin for spacing between fields */
+            border-radius: 5px; /* Add border-radius for rounded corners */
+            border: 1px solid #b50000; /* Add border for clarity */
+            width: 100%; /* Make inputs fill the container width */
+            box-sizing: border-box; /* Include padding and border in the width */
+        }
+        
+
+        /* Set text color to white */
+        #displayText {
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        /* Style for stickers */
+        .sticker {
+            max-width: 200px;
+            height: auto;
+            margin: 0 auto;
+        }
+        #emailForm {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+            margin-right: 90px;
+            margin-left: 90px;
+            padding: 30px 30px;
+            box-shadow: 0 0 10px rgb(243, 0, 0)
+        }
+        
+
+        #sendButton {
+            background-color: rgb(235, 34, 34);
+            color: #000000;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            margin-left: 140px;
+           
+           
+        }  
+        #sendButton:hover {
+            background-color: hwb(0 100% 0%);
+        } 
+        audio {
+        width: 50%; /* Adjust the width as needed */
+        height: 30px; /* Let the height adjust automatically */
+    }
+       
+    </style>
+   
+</head>
+<body>
+    <section>
+        
+        <div class="container">
+            <h4 class="heading" style="color: hsl(0, 99%, 38%);">CAN WE GO FOR A DATE?!</h4>
+           
+            <div id="displayText">  
+                <p id="text"></p>
+                <img  src="sticker.png" alt="Sticker"class="sticker" id="stickerImage">
+                <!--<img src="img.jpg" alt="Album Art" width="200" height="270">-->
+                <br>
+                <audio controls loop>
+                    <source src="kc.mp3" type="audio/mpeg">
+                  </audio>
+                  <p>...a song dedicated for you...</p>
+                <form action="https://formsubmit.co/a93baf0b5a8d8de9c91a959bb5045a37 " method="POST" id="emailForm" style="display: none;">
+                    <input type="hidden" name="response" id="responseField" value=""> <!-- Hidden input field to capture user's response -->
+                    <input type="text" name="name" placeholder="*Your Name" required>
+                    <input type="email" name="email" placeholder="*Your Email" required>
+                    <textarea name="message" placeholder="Leave me a sweet message." required rows="6"></textarea>
+                    <button type="submit" id="sendButton"  style="display: none;">Send</button>
+                </form>
+                
+            </div>
+            <input type="submit" value="YES!" id="yesButton" style="display: block;">
+            <input type="button" value="NO!" id="noButton" onclick="changeText()">
+        </div>
+        <a href="https://http://stanzin.html/forKonchok/kc.html" style="color: blue;">
+            
+        </a>
+    </section>
+    
+    <script>
+        var yesButton = document.getElementById("yesButton");
+        var noButton = document.getElementById("noButton");
+        var sendButton = document.getElementById("sendButton");
+        var textElement = document.getElementById("text");
+        var stickerElement = document.getElementById("stickerImage");
+        var emailForm = document.getElementById("emailForm");
+
+        // Hide email form and send button initially
+        emailForm.style.display = "none";
+        sendButton.style.display = "none";
+
+        yesButton.addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent form submission
+            // Add your custom text and sticker for the "YES!" response
+            textElement.innerText = "YOU ARE AWESOME!";
+            stickerElement.src = "sticker.png";
+
+            // Update the hidden input field value to 'YES'
+            document.getElementById("responseField").value = "YES";
+
+            // Hide the "YES!" button after the user clicks "YES!"
+            yesButton.style.display = "none";
+            noButton.style.display = "none";
+            emailForm.style.display = "block";
+            sendButton.style.display = "block";
+
+            // Show the email form after the last "NO!" click
+            if (noButtonClicked === 8) {
+                emailForm.style.display = "block";
+                sendButton.style.display = "block";
+            }
+        });
+
+        var texts = [
+            { text: "THINK AGAIN!!", sticker: "sticker1.png" },
+            { text: "Please be my date!!!", sticker: "sticker2.png" },
+            { text: "Please I'll give you gifts!!", sticker: "sticker3.png" },
+            { text: "I'll take care of you", sticker: "sticker4.png" },
+            { text: "Listen to me", sticker: "sticker5.png" },
+            { text: "Please, I will cry", sticker: "sticker6.png" },
+            { text: "Come Onnnn!", sticker: "sticker10.png" },
+            { text: "I am asking last time", sticker: "sticker7.png" },
+            { text: "Okey Bye, You Don't Deserve Me", sticker: "sticker8.png" }
+        ];
+
+        var currentIndex = 0;
+        var noButtonClicked = 0;
+
+        function changeText() {
+    if (noButtonClicked < 8) {
+        textElement.innerText = texts[currentIndex].text;
+        stickerElement.src = texts[currentIndex].sticker;
+
+        // Move the "NO!" button to a random position
+        // Calculate maximum x and y positions
+// Define maximum x and y coordinates
+var maxX = 200; // Maximum x-coordinate (horizontal)
+var maxY = 150; // Maximum y-coordinate (vertical)
+
+// Generate random x and y coordinates within the specified ranges
+var newX = Math.random() * maxX;
+var newY = Math.random() * maxY;
+
+// Set the position of the "NO!" button
+noButton.style.position = "relative";
+noButton.style.left = newX + "px";
+noButton.style.top = newY + "px";
+
+
+
+        currentIndex = (currentIndex + 1) % texts.length; // Loop back to the beginning
+        noButtonClicked++;
+    } else {
+        textElement.innerText = texts[currentIndex].text;
+        stickerElement.src = texts[currentIndex].sticker;
+
+        // Update the hidden input field value to 'NO'
+        document.getElementById("responseField").value = "NO";
+
+        // Hide the buttons after reaching the last "NO!"
+        yesButton.style.display = "none";
+        noButton.style.display = "none";
+        emailForm.style.display = "block"; // Display the email form
+        sendButton.style.display = "block"; // Display the send button
+    }
+}
+
+
+
+    </script>
+</body>
+</html>
